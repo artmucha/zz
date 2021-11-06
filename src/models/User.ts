@@ -18,6 +18,14 @@ const userSchema = new Schema<UserInterface>({
         type: String,
         required: true
     }
+},
+{
+    toJSON :{
+        transform(doc, ret) {
+            delete ret.password;
+            delete ret.__v;
+        }
+    }
 });
 
 userSchema.pre('save', async function(done) {
@@ -29,10 +37,5 @@ userSchema.pre('save', async function(done) {
 })
 
 const User = model<UserInterface>('User', userSchema);
-
-const user = new User({
-    email: 'arti.mucha@gmail.com',
-    password: '12345678'
-});
 
 export default User;
