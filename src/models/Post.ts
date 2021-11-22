@@ -10,8 +10,7 @@ interface PostInterface extends Document {
     userId: string,
     date: string,
     slug: string,
-    createdAt: string;
-    updatedAt: string;
+    image: string,
 }
 
 const postSchema = new Schema<PostInterface>({
@@ -46,8 +45,15 @@ const postSchema = new Schema<PostInterface>({
     },
     slug: {
         type: String,
+    },
+    image: {
+        type: String,
     }
-});
+},
+{
+    timestamps: { createdAt: true, updatedAt: true }
+}
+);
 
 const Post = model<PostInterface>('Post', postSchema);
 
